@@ -10,6 +10,7 @@ import { ModalName } from '../state'
 import {
   fetchContactsAction,
   resetContactsAction,
+  setCountryAction,
 } from '../actions/contacts.actions'
 
 function* goToSaga(action: ReturnType<typeof goToAction>) {
@@ -33,8 +34,10 @@ function* changeLocationSaga(action: any) {
     yield put(resetContactsAction())
     // Open modal B
     yield put(openModalAction(ModalName.B))
+    // Set country to US
+    yield put(setCountryAction(226))
     // Launch fetch contacts from API
-    yield put(fetchContactsAction(226))
+    yield put(fetchContactsAction())
   }
 }
 

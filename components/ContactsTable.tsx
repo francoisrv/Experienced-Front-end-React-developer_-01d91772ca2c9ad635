@@ -34,9 +34,7 @@ function ContactsTable(props: ContactsTableProps) {
   const { page } = props
 
   function loadMore() {
-    // const nextPage = page + 1
-    // setPage(nextPage)
-    // props.fetchContactsAction(0, nextPage)
+    props.fetchContactsAction()
   }
 
   let content: React.ReactNode

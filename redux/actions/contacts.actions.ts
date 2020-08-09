@@ -1,13 +1,9 @@
 import { ReduxActionType } from '../types'
 import { Contact } from '../state'
 
-export function fetchContactsAction(country = 0, page = 1) {
+export function fetchContactsAction() {
   return {
     type: ReduxActionType.FETCH_CONTACTS as ReduxActionType.FETCH_CONTACTS,
-    payload: {
-      country,
-      page,
-    },
   }
 }
 
@@ -69,6 +65,15 @@ export function setPageAction(page: number) {
     type: ReduxActionType.SET_PAGE as ReduxActionType.SET_PAGE,
     payload: {
       page,
+    },
+  }
+}
+
+export function setCountryAction(country: number) {
+  return {
+    type: ReduxActionType.SET_COUNTRY as ReduxActionType.SET_COUNTRY,
+    payload: {
+      country,
     },
   }
 }

@@ -6,7 +6,7 @@ type State = ReduxState['page']
 
 type Actions = ReturnType<typeof setPageAction>
 
-const initialState: State = 1
+const initialState: State = 0
 
 export default function pageReducer(
   state: State = initialState,

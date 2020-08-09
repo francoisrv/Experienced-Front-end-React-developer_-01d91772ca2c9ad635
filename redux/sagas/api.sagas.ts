@@ -9,14 +9,23 @@ import {
   searchContactsAction,
   setTotalAction,
   loadContactsOnVisibilityAction,
+  setPageAction,
 } from '../actions/contacts.actions'
 import { fetchContacts } from '../../api/methods'
-import { pick } from 'lodash'
 import ReduxState, { ActionState } from '../state'
+import { pick } from 'lodash'
 
 function* fetchContactsSaga(action: ReturnType<typeof fetchContactsAction>) {
   yield put(fetchingContactsAction())
-  const { contacts, total } = yield call(fetchContacts, action.payload)
+  const { country, page } = yield select((state: ReduxState) =>
+    pick(state, ['country', 'page'])
+  )
+  const nextPage = page + 1
+  yield put(setPageAction(nextPage))
+  const { contacts, total } = yield call(fetchContacts, {
+    country,
+    page: nextPage,
+  })
   yield put(fetchedContactsAction())
   yield put(setTotalAction(total))
   yield put(loadContactsAction(contacts))
@@ -46,7 +55,7 @@ function* loadContactsOnVisibilitySaga(
     (state: ReduxState) => state.fetchContactsState
   )
   if (actionState === ActionState.DONE) {
-    console.log(123)
+    yield put(fetchContactsAction())
   }
 }
 

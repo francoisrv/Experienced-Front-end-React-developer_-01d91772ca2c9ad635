@@ -25,11 +25,12 @@ export interface Contact {
 }
 
 export default interface ReduxState {
-  currentModal: ModalName | null
-  fetchContactsState: ActionState
   contacts: Contact[]
-  search: string
+  country: number
+  currentModal: ModalName | null
   evenOnly: boolean
-  total: number
+  fetchContactsState: ActionState
   page: number
+  search: string
+  total: number
 }
