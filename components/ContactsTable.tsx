@@ -12,7 +12,8 @@ import { fetchContactsAction } from '../redux/actions/contacts.actions'
 type ContactsTableStore = Pick<ReduxState, 'fetchContactsState'> &
   Pick<ReduxState, 'contacts'> &
   Pick<ReduxState, 'evenOnly'> &
-  Pick<ReduxState, 'total'>
+  Pick<ReduxState, 'total'> &
+  Pick<ReduxState, 'page'>
 
 interface ContactsTableActions {
   fetchContactsAction: typeof fetchContactsAction
@@ -21,7 +22,7 @@ interface ContactsTableActions {
 type ContactsTableProps = ContactsTableStore & ContactsTableActions
 
 const connector = (state: ReduxState): ContactsTableStore =>
-  pick(state, ['fetchContactsState', 'contacts', 'evenOnly', 'total'])
+  pick(state, ['fetchContactsState', 'contacts', 'evenOnly', 'total', 'page'])
 
 const actions: ContactsTableActions = {
   fetchContactsAction,
@@ -30,12 +31,12 @@ const actions: ContactsTableActions = {
 const withStore = connect(connector, actions)
 
 function ContactsTable(props: ContactsTableProps) {
-  const [page, setPage] = React.useState(1)
+  const { page } = props
 
   function loadMore() {
-    const nextPage = page + 1
-    setPage(nextPage)
-    props.fetchContactsAction(0, nextPage)
+    // const nextPage = page + 1
+    // setPage(nextPage)
+    // props.fetchContactsAction(0, nextPage)
   }
 
   let content: React.ReactNode

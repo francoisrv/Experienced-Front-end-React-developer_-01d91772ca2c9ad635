@@ -8,6 +8,7 @@ import {
   fetchContactsAction,
   searchContactsAction,
   setTotalAction,
+  loadContactsOnVisibilityAction,
 } from '../actions/contacts.actions'
 import { fetchContacts } from '../../api/methods'
 import { pick } from 'lodash'
@@ -38,7 +39,22 @@ function* searchSaga(action: ReturnType<typeof searchContactsAction>) {
   }
 }
 
+function* loadContactsOnVisibilitySaga(
+  action: ReturnType<typeof loadContactsOnVisibilityAction>
+) {
+  const actionState = yield select(
+    (state: ReduxState) => state.fetchContactsState
+  )
+  if (actionState === ActionState.DONE) {
+    console.log(123)
+  }
+}
+
 export default function* apiSagas() {
   yield takeLatest(ReduxActionType.FETCH_CONTACTS, fetchContactsSaga)
   yield takeLatest(ReduxActionType.SET_SEARCH, searchSaga)
+  yield takeLatest(
+    ReduxActionType.LOAD_CONTACTS_ON_VISIBILITY,
+    loadContactsOnVisibilitySaga
+  )
 }

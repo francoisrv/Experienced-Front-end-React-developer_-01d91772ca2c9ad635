@@ -31,4 +31,5 @@ export default interface ReduxState {
   search: string
   evenOnly: boolean
   total: number
+  page: number
 }

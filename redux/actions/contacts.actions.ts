@@ -57,3 +57,18 @@ export function setTotalAction(total: number) {
     payload: { total },
   }
 }
+
+export function loadContactsOnVisibilityAction() {
+  return {
+    type: ReduxActionType.LOAD_CONTACTS_ON_VISIBILITY as ReduxActionType.LOAD_CONTACTS_ON_VISIBILITY,
+  }
+}
+
+export function setPageAction(page: number) {
+  return {
+    type: ReduxActionType.SET_PAGE as ReduxActionType.SET_PAGE,
+    payload: {
+      page,
+    },
+  }
+}
